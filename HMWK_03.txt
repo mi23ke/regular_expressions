@@ -1,0 +1,170 @@
+#----------------------------------------------------------------------
+Programming Assignment 03
+
+#----------------------------------------------------------------------
+Purpose:
+
+  * Demonstrate (elementary) understanding of Regular Expressions and
+    how to use them in various useful languages.
+
+#----------------------------------------------------------------------
+Background:
+
+  * The input file will have multiple proposed tokens on each line.
+
+  * The proposed tokens will be separated by whitespace, which is to
+    be ignored.
+
+  * Your program will consider successive tokens from the input file
+    and classify them as 'ID', 'FP', 'INT', or 'does not match'.
+
+  * An ID starts with a dollar sign, a lowercase letter, or a
+    vertical bar.  After the first character, any number (including
+    zero) of uppercase letters and decimal digits may occur.  If
+    the ID started with a vertical bar, there must be a vertical
+    bar as the last character as well.
+
+  * An INT is a percent sign followed by one or more hex digits.
+    The hex digits for 10 through 15 may be expressed with upper
+    or lowercase letters.
+
+  * An FP is one or more decimal digits, followed by a decimal
+    point, followed one or more decimal digits.
+
+#----------------------------------------------------------------------
+Examples:
+
+  $A9B  is a legal ID.
+  |QQQ  is not a legal ID (it started with a vertical bar but did
+          not end with one).
+  a5|   is not a legal ID (it ends with a vertical bar but did
+          not start with one).
+  |999| is a legal ID.
+  a5    is a legal ID.
+  0_a_f is not a legal ID (it starts with a digit).
+  0_a_f is not a legal INT (doesn't start with a percent sign).
+  0_a_f is not a legal FP (it has letters and underscores, it does
+          not have a decimal point).
+  0_a_f should be identified as 'does not match'.
+  %456  is a legal INT.
+  123.  is not a legal FP (it has no digits after the decimal point).
+  .123  is not a legal FP (it has on digits before the decimal point).
+  56.65 is a legal FP.
+
+#----------------------------------------------------------------------
+Tasks:
+
+  1. Download HMWK_03_dalioba.zip from Blackboard.
+
+  2. Unzip the file somewhere convenient.
+
+  3. Change 'dalioba' in the name of the directory to your NetID.
+     (Your NetID is three letters followed by four or five digits.
+      The directory name will now be something like 'hmwk_01_abc1234',
+      with YOUR NetID instead of 'abc1234'.)
+
+  4. Look in that directory.
+
+  5. Change the header lines in the skeleton files
+     hmwk_03.cs / .java / .py.  (Put your name on line 1, your NetID
+     on line 2, and the date on line 3.)
+
+  6. Run the files you just changed with the provided
+     'inputdata.text' as the input file.
+
+  7. Observe the following output (it will be the same no matter which
+     language you picked):
+
+processing tokens from inputdata.txt ...
+>$A9B< is the proposed token.
+>|QQQ< is the proposed token.
+>a5|< is the proposed token.
+>|999|< is the proposed token.
+>a5< is the proposed token.
+>0_a_f< is the proposed token.
+>0af< is the proposed token.
+>%456< is the proposed token.
+>123%456< is the proposed token.
+>123%< is the proposed token.
+>%123ab< is the proposed token.
+>%beef< is the proposed token.
+>123.< is the proposed token.
+>.123< is the proposed token.
+>56.65< is the proposed token.
+
+  8. Now, change the contents of processToken() function in each of
+     the hmwk_03.cs, .java, and .py files to use the regular
+     expression support of the corresponding language so that the
+     following output is generated for the 'inputdata.txt' test
+     case file.
+
+processing tokens from inputdata.txt ...
+>$A9B< matches ID
+>|QQQ< does not match
+>a5|< does not match
+>|999|< matches ID
+>a5< matches ID
+>0_a_f< does not match
+>0af< does not match
+>%456< matches INT
+>123%456< does not match
+>123%< does not match
+>%123ab< matches INT
+>%beef< matches INT
+>123.< does not match
+>.123< does not match
+>56.65< matches FP
+
+  9. You should get the same output for each of the three languages.
+     Make your output match this format EXACTLY since when your
+     solutions are tested, their output will be checked using diff.
+
+#----------------------------------------------------------------------
+Submission:
+
+Make a zipfile of your 'hmwk_03_abc1234' directory (where 'abc1234'
+is replaced with YOUR NetID) and submit it on Blackboard as your
+results for this assignment.  Your submission should be a zipfile
+that has exactly one item in it, a directory named 'hmwk_03_abc1234'
+(where 'abc1234' is YOUR NetID).  Inside that directory should be
+three source files, hmwk_03.cs, hmwk_03.java, and hmwk_03.py.
+
+Your submission will be run on another file of test data.  That file
+will have 20 possible tokens and your solutions will score 1/2 point
+for each token that generates the correct message.
+
+Therefore, the maximum possible score for this homework assignment
+is 30 points (10 + 10 + 10).
+
+#----------------------------------------------------------------------
+Hints:
+  1. You might use some lines of static code aside from changing the
+     contents of processToken().  (This will depend on how you decide
+     to do the regular expressions.)
+
+  2. Don't change anything in the 'Main' (C#) or 'main' (Java, Python)
+     functions.  Those routines will pump the proposed tokens into
+     the processToken() function for you.
+
+  3. These programs are not complex.  The processToken() routine
+     in the C# proposed solution is 15 lines of code, including some
+     static data.  For Java, it's 12 lines of code.  For Python,
+     it's 16 lines of code, including some static data.  If you
+     find yourself writing lots more code than this, you're probably
+     going down the wrong path.
+
+  4. After you write your regular expressions, make up some test
+     cases of your own to ensure that your REs really match the
+     descriptions given above.  The test cases in 'inputdate.txt'
+     are useful, but they are NOT comprehensive.  Make up some
+     more of your own.
+
+  5. Ensure your output messages match the format shown above when
+     you change the processToken() function.  The output is going
+     to be checked by a program, so it has to match EXACTLY.
+
+  6. Ensure you use the regular expression support of the language.
+     Programs that do not do all of their matching using regular
+     expressions will score ZERO points.
+
+#----------------------------------------------------------------------
